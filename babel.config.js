@@ -17,7 +17,8 @@ module.exports = function(api) {
             "@sagas": "./application/sagas",            
             "@screens": "./application/screens",
             "@utils": "./application/utils",
-          }
+          },
+          "extensions": [".ios.js", ".android.js", ".js", ".json"]
         }
       ],
     ]
