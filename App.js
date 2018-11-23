@@ -1,9 +1,16 @@
 import React from 'react';
-import { Text } from 'react-native'
+import { Provider } from 'react-redux'
+
+//Store
+import store from '@application/store'
+//Components
 import Container from '@styled-components/Container'
+import Application from '@application'
 
 export default () => (
-  <Container>
-    <Text>Open up App.js to start working on your app!</Text>
-  </Container>
+  <Provider store={store}>
+    <Container>
+      <Application />
+    </Container>
+  </Provider>
 )
