@@ -1,25 +1,36 @@
 import React from 'react'
-import { createStackNavigator } from 'react-navigation'
+import { createBottomTabNavigator } from 'react-navigation'
+import { Ionicons, FontAwesome } from '@expo/vector-icons'
 
 //Components
-import Deck from '@components/Menu'
-import NewDeck from '@components/Menu'
+import Decks from '@screens/Decks'
+import NewDeck from '@screens/NewDeck'
 
-const AppNavigator = createStackNavigator({
-    Deck: {
-        screen: Deck,
+export default createBottomTabNavigator({
+    Decks: {
+        screen: Decks,
+        navigationOptions: {
+            tabBarLabel: 'Decks',
+            tabBarIcon: ({ tintColor }) => (
+                <Ionicons name='ios-albums' color={tintColor}/>
+            )
+        }
     },
     NewDeck: {
-        screen: Deck,
+        screen: NewDeck,
+        navigationOptions: {
+            tabBarLabel: 'New Deck',
+            tabBarIcon: ({ tintColor }) => (
+                <Ionicons name='ios-add' size={25} color={tintColor}/>
+            )
+        }
     },
 },
 {
-    initialRouteName: 'Deck',
-    mode: 'card',
-    headerMode: 'none',
-    navigationOptions: {
-        headerVisible: false,
-    }    
+    initialRouteName: 'Decks',
+    tabBarOptions: {
+        activeTintColor: 'tomato',
+        inactiveTintColor: 'grey',
+        showIcon: true,
+    }
 })
-
-export default AppNavigator
