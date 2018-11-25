@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { withNavigation } from 'react-navigation'
 
 //Components
 import Card from './Card'
@@ -24,7 +25,7 @@ const SubTitle = styled.Text`
     color: #FF4500;
 `
 
-const MenuCard = ({ title, questions }) => {
+const MenuCard = ({ navigation, title, questions }) => {
     const counterQuestions = questions.length
 
     return (
@@ -36,7 +37,10 @@ const MenuCard = ({ title, questions }) => {
                     <ButtonCard>
                         <ButtonText>Add Card</ButtonText>
                     </ButtonCard>
-                    <ButtonCard backgroundColor='#000'>
+                    <ButtonCard backgroundColor='#000' onPress={() => navigation.navigate('Quiz', {
+                        title,
+                        questions
+                    })}>
                         <ButtonText colorText='#FFF'>Start Quiz</ButtonText>
                     </ButtonCard>
                 </ContainerButton>                
@@ -45,11 +49,12 @@ const MenuCard = ({ title, questions }) => {
     )
 }
 
-const { string, array } = PropTypes
+const { string, array, object } = PropTypes
 
 MenuCard.propTypes = {
+    navigation: object,
     title: string.isRequired,
     questions: array.isRequired
 }
 
-export default MenuCard;
+export default withNavigation(MenuCard);
