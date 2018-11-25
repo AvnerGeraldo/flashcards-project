@@ -2,13 +2,16 @@ import React from 'react'
 import { createBottomTabNavigator } from 'react-navigation'
 import { Ionicons, FontAwesome } from '@expo/vector-icons'
 
-//Components
+//Screens
 import Decks from '@screens/Decks'
 import NewDeck from '@screens/NewDeck'
 
+//Routes
+import TabDecks from './TabDecks'
+
 export default createBottomTabNavigator({
     Decks: {
-        screen: Decks,
+        screen: TabDecks,
         navigationOptions: {
             tabBarLabel: 'Decks',
             tabBarIcon: ({ tintColor }) => (
@@ -24,7 +27,7 @@ export default createBottomTabNavigator({
                 <Ionicons name='ios-add' size={25} color={tintColor}/>
             )
         }
-    },
+    }
 },
 {
     initialRouteName: 'Decks',
