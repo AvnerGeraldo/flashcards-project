@@ -1,20 +1,25 @@
 import React from 'react'
+import { Dimensions } from 'react-native'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { withNavigation } from 'react-navigation'
 
 //Components
 import Card from './Card'
-import ContainerButton from './ContainerCard'
+import ContainerButton from './ContainerButton'
 import ButtonCard from './ButtonCard'
 import ButtonText from './ButtonText'
 
 const ContainerMenuCard = styled.View`
     flex: 1;
-    flex-direction: row;
     justify-content: center;
     align-items: stretch;  
-    background-color: #ADD8E6;    
+    background-color: #ADD8E6;
+    width: ${Dimensions.get('window').width};
+`
+
+const ContentCard = styled.View`
+    align-items: center;
 `
 
 const Title = styled.Text`
@@ -31,19 +36,21 @@ const MenuCard = ({ navigation, title, questions }) => {
     return (
         <ContainerMenuCard>
             <Card>
-                <Title>{title}</Title>
-                <SubTitle>{counterQuestions} Cards</SubTitle>
-                <ContainerButton>
-                    <ButtonCard>
-                        <ButtonText>Add Card</ButtonText>
-                    </ButtonCard>
-                    <ButtonCard backgroundColor='#000' onPress={() => navigation.navigate('Quiz', {
-                        title,
-                        questions
-                    })}>
-                        <ButtonText colorText='#FFF'>Start Quiz</ButtonText>
-                    </ButtonCard>
-                </ContainerButton>                
+                <ContentCard>
+                    <Title>{title}</Title>
+                    <SubTitle>{counterQuestions} Cards</SubTitle>
+                    <ContainerButton>
+                        <ButtonCard>
+                            <ButtonText>Add Card</ButtonText>
+                        </ButtonCard>
+                        <ButtonCard backgroundColor='#000' onPress={() => navigation.navigate('Quiz', {
+                            title,
+                            questions
+                        })}>
+                            <ButtonText colorText='#FFF'>Start Quiz</ButtonText>
+                        </ButtonCard>
+                    </ContainerButton>
+                </ContentCard>               
             </Card>
         </ContainerMenuCard>
     )

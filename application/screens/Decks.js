@@ -38,7 +38,7 @@ class Decks extends PureComponent {
             <FlatList 
                 horizontal={true} 
                 data={Object.keys(dataDecks)}
-                keyExtractor={(item, index) => item}
+                keyExtractor={(title) => title}
                 renderItem={({ item }) => {
                     const itemObj = dataDecks[item]
                     return <MenuCard title={itemObj.title} questions={itemObj.questions} />
