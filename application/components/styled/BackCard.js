@@ -1,6 +1,4 @@
 import React from 'react'
-import { Dimensions, View, Text } from 'react-native'
-import { Header } from 'react-navigation'
 import styled from 'styled-components'
 
 //Components
@@ -13,7 +11,6 @@ const BackCard = styled.View`
     justify-content: space-around;
     align-items: stretch;
     padding: 10px;
-    background-color: #000;
 `
 
 const TextIndicatorCountCard = styled.Text`
@@ -36,26 +33,30 @@ const TextAnswer = styled.Text`
 
 const ContainerButton = styled.View`
     flex: 1;
-    justify-content: flex-end;
+    justify-content: center;
 `
 
 export default ({ actualPos, endPos, answer, responseAnswer }) => (
-
+    <Card>
         <BackCard>
             <TextIndicatorCountCard>{actualPos} / {endPos}</TextIndicatorCountCard>
-            
-        </BackCard>
-);
-/*
-<AnswerContent>
+            <AnswerContent>
                 <TextAnswer>{answer}</TextAnswer>
                 <ContainerButton>
-                    <ButtonCard backgroundColor='#3CB371' borderColor='#2E8B57' onPress={() => responseAnswer(actualPos, 'C')}>
+                    <ButtonCard 
+                        backgroundColor='#3CB371' 
+                        borderColor='#2E8B57' 
+                        onPress={() => responseAnswer('C')}>
                         <ButtonText colorText='#FFF'>Correct</ButtonText>
                     </ButtonCard>
-                    <ButtonCard backgroundColor='#CD4F39' borderColor='#EE5C42' onPress={() => responseAnswer(actualPos, 'I')}>
+                    <ButtonCard 
+                        backgroundColor='#CD4F39' 
+                        borderColor='#EE5C42' 
+                        onPress={() => responseAnswer('I')}>
                         <ButtonText colorText='#FFF'>Incorrect</ButtonText>
                     </ButtonCard>
                 </ContainerButton>
-            </AnswerContent>
-*/
+            </AnswerContent>            
+        </BackCard>
+    </Card>
+);
