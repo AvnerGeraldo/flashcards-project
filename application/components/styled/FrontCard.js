@@ -1,5 +1,4 @@
 import React from 'react'
-import { Dimensions } from 'react-native'
 import styled from 'styled-components'
 import { MaterialIcons } from '@expo/vector-icons'
 
@@ -10,7 +9,6 @@ const FrontCard = styled.View`
     flex: 1;
     justify-content: flex-start;
     padding: 10px;
-    width: ${Dimensions.get('window').width - 54};
 `
 
 const TextIndicatorCountCard = styled.Text`
