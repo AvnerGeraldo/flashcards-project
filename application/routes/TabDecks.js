@@ -1,8 +1,10 @@
-import { createStackNavigator } from 'react-navigation'
+import React from 'react'
+import { createStackNavigator, HeaderBackButton, StackActions, NavigationActions } from 'react-navigation'
 
 //Screens
 import Decks from '@screens/Decks'
 import Quiz from '@screens/Quiz'
+import Score from '@screens/Score'
 
 export default createStackNavigator({
     'Decks': {
@@ -17,9 +19,29 @@ export default createStackNavigator({
             title: 'Quiz',
             headerTintColor: '#000',
             headerStyle: {
-                backgroundColor: '#ADD8E6',
+                backgroundColor: '#FFF',
             },
         }
+    },
+    Score: {
+        screen: Score,
+        navigationOptions: ({ navigation: { state: { params }, dispatch }}) => ({
+            title: `Score of ${params.deck}`,
+            headerTintColor: '#000',
+            headerStyle: {
+                backgroundColor: '#FFF',
+            },
+            headerLeft: (
+                <HeaderBackButton onPress={() => {
+                    const resetAction = StackActions.reset({
+                        index: 0,
+                        actions: [NavigationActions.navigate({ routeName: 'Decks' })]
+                    })
+
+                    dispatch(resetAction)
+                }} />
+            )
+        })
     },
 }, {
     initialRouteName: 'Decks'
