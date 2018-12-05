@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
 //API
 import { saveAnswerQuestion } from '@api'
@@ -59,6 +60,21 @@ class Quiz extends PureComponent {
             />
         )        
     }
+}
+
+const { shape, func, string, array } = PropTypes
+
+Quiz.propTypes = {
+    navigation: shape({
+        getParam: func.isRequired,
+        navigate: func.isRequired,
+        state: shape({
+            params: shape({
+                questions: array.isRequired,
+                title: string.isRequired
+            })
+        })
+    })
 }
 
 export default Quiz
