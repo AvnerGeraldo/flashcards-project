@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-//API
-import { saveAnswerQuestion } from '@api'
+//Action
+import { SAVE_ANSWER_ON_DECK } from '@actions/saga-actions'
 
 //Components
 import FlipCard from '@components/FlipCard'
@@ -17,14 +18,15 @@ class Quiz extends PureComponent {
     
     receiveAnwser = (posQuestion, answer) => {        
         const { questions, title } = this.props.navigation.state.params
+        const { saveAnswer } = this.props
 
         //Setar resposta em AsyncStorage
-        saveAnswerQuestion(title, (posQuestion - 1), answer)
-            .then(res => {
-                if (res.error) {
-                    this.setState({ error: res.error.message })
-                }
-            })
+        saveAnswer(title, (posQuestion -1), answer)
+        .then(res => {
+            if (res.error) {
+                this.setState({ error: res.error.message })
+            }
+        })
 
         //Verificar se completou quiz
         if (questions.length === posQuestion) {
@@ -77,4 +79,13 @@ Quiz.propTypes = {
     })
 }
 
-export default Quiz
+const mapDispatchToProps = dispatch => ({
+    saveAnswer: (title, indexQuestion, answer) => new Promise((resolve, reject) => dispatch({
+        type: SAVE_ANSWER_ON_DECK,
+        payload: {
+            resolve, reject, title, indexQuestion, answer
+        }
+    }))
+})
+
+export default connect(null, mapDispatchToProps)(Quiz)
