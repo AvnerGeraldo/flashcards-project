@@ -1,37 +1,53 @@
 import React, { PureComponent } from 'react'
-import { Text } from 'react-native'
+
+//API
+import { saveAnswerQuestion } from '@api'
 
 //Components
 import FlipCard from '@components/FlipCard'
 
-/*
-- Preciso receber parametros: 
-    - Questions(Array)
-    - Nº da questao atual(Caso não passe será igual a 0)
-    - Ao clicar em (Correct / Incorrect) passar parametros:
-        - Questions(Array)(Atualizado com a informação de correto ou incorreto da questao)
-        - Nº da proxima questão
-
-- Quando Nº da questão atual == total de questões:
-    - Link do botão (Correct / Incorrect) irá direcionar para a tela de score
-*/
+//styled
+import ErrorToShow from '@styled-components/ErrorToShow'
 
 class Quiz extends PureComponent {
     state = {
         actualPosQuis: 1
     }
     
-    receiveAnwser = (posQuestion, answer) => {
+    receiveAnwser = (posQuestion, answer) => {        
+        const { questions, title } = this.props.navigation.state.params
+
+        //Setar resposta em AsyncStorage
+        saveAnswerQuestion(title, (posQuestion - 1), answer)
+            .then(res => {
+                if (res.error) {
+                    this.setState({ error: res.error.message })
+                }
+            })
+
+        //Verificar se completou quiz
+        if (questions.length === posQuestion) {
+            this.props.navigation.navigate('Score', { deck: title })
+            return
+        }       
+
         //Tratar answer
-        //this.setState({ actualPosQuis: posQuestion + 1 })
-        console.log(posQuestion, answer)
+        this.setState({ actualPosQuis: posQuestion + 1 })
     }
 
     render() {
-        const { actualPosQuis } = this.state
+        const { actualPosQuis, error } = this.state
         const data = this.props.navigation.getParam('questions')
         const totalCountCards = data.length
         const { question, answer } = data[actualPosQuis - 1]
+
+        if (error) {
+            return <ErrorToShow textError={error} />
+        }
+
+        if (!question) { 
+            return null
+        }
 
         return (
             <FlipCard 
@@ -41,7 +57,7 @@ class Quiz extends PureComponent {
                 totalCountCards={totalCountCards} 
                 receiveAnwser={(answered) => this.receiveAnwser(actualPosQuis, answered)}
             />
-        )
+        )        
     }
 }
 
