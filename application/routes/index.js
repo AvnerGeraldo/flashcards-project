@@ -1,9 +1,8 @@
 import React from 'react'
 import { createBottomTabNavigator } from 'react-navigation'
-import { Ionicons, FontAwesome } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 
 //Screens
-import Decks from '@screens/Decks'
 import NewDeck from '@screens/NewDeck'
 
 //Routes
