@@ -30,11 +30,10 @@ export const getDecks = async() => {
     }
 }
 
-export const getDeck = async(deck) => {
+export const getDeck = async(title) => {
     try {
         const allData = await getDataOnAsyncStorage()
-        
-        return Object.keys(allData).map(titleOfDeck => titleOfDeck === deck && allData[deck])
+        return allData[title] ? allData[title] : []        
     } catch(error) {
         return { error }
     }
@@ -114,7 +113,7 @@ export const saveAnswerQuestion = async(title, indexQuestion, answered) => {
         
         //Add answer in question
         allData[title].questions[indexQuestion].answered = answered
-    
+        
         //Set the new data on AsyncStorage
         await AsyncStorage.setItem(token, JSON.stringify(allData))
 
