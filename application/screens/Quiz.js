@@ -23,19 +23,19 @@ class Quiz extends PureComponent {
         //Setar resposta em AsyncStorage
         saveAnswer(title, (posQuestion -1), answer)
         .then(res => {
-            if (res.error) {
+            if (res && res.error) {
                 this.setState({ error: res.error.message })
             }
+
+            //Verificar se completou quiz
+            if (questions.length === posQuestion) {
+                this.props.navigation.navigate('Score', { deck: title })
+                return
+            }       
+
+            //Tratar answer
+            this.setState({ actualPosQuis: posQuestion + 1 })
         })
-
-        //Verificar se completou quiz
-        if (questions.length === posQuestion) {
-            this.props.navigation.navigate('Score', { deck: title })
-            return
-        }       
-
-        //Tratar answer
-        this.setState({ actualPosQuis: posQuestion + 1 })
     }
 
     render() {
