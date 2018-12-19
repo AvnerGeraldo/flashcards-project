@@ -43,6 +43,9 @@ const MenuCard = ({ navigation, title, questions }) => {
                         <ButtonCard>
                             <ButtonText>Add Card</ButtonText>
                         </ButtonCard>
+                        <ButtonCard borderColor='#87CEFA' onPress={() => navigation.navigate('Score', { deck: title })}>
+                            <ButtonText colorText='#87CEEB'>Score of Deck</ButtonText>
+                        </ButtonCard>
                         <ButtonCard backgroundColor='#000' onPress={() => navigation.navigate('Quiz', {
                             title,
                             questions
