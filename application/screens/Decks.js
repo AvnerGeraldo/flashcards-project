@@ -48,7 +48,7 @@ class Decks extends PureComponent {
     }
 }
 
-const mapStateToProps = ({ deck: { dataDecks, error } }) => ({
+const mapStateToProps = ({ listDecks: { dataDecks, error } }) => ({
     dataDecks,
     error
 })
