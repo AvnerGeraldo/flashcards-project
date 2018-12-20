@@ -31,9 +31,8 @@ const TextQuestion = styled.Text`
 
 const IconContent = styled.View`
     flex: 1;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin-top: 180;
+    justify-content: center;
+    align-items: center;
 `
 const TextIcon = styled.Text`
     font-size: 12px;
