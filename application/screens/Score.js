@@ -9,8 +9,7 @@ import { GET_DECK } from '@actions/saga-actions'
 //Styled
 import Loading from '@styled-components/Loading'
 import ErrorToShow from '@styled-components/ErrorToShow'
-import Container from '@styled-components/Container'
-import ContentScore from '@styled-components/ContentScore'
+import Card from '@styled-components/Card'
 import TextCenter from '@styled-components/TextCenter'
 
 
@@ -104,13 +103,11 @@ class Score extends Component {
         }
 
         return (
-            <Container>
-                <ContentScore>
-                    <TextCenter fontSize='40' color={colorText}>{percentToShow}%</TextCenter>
-                    <Emoji name={emoji} style={{ fontSize: 50, textAlign: 'center' }} />
-                    <TextCenter>{textToShow}</TextCenter>
-                </ContentScore>
-            </Container>
+            <Card>
+                <TextCenter fontSize='40' color={colorText}>{percentToShow}%</TextCenter>
+                <Emoji name={emoji} style={{ fontSize: 50, textAlign: 'center' }} />
+                <TextCenter>{textToShow}</TextCenter>
+            </Card>
         )        
     }
 }
