@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text } from 'react-native'
+import Emoji from 'react-native-emoji'
+import PropTypes from 'prop-types'
 
 //Actions
 import { GET_DECK } from '@actions/saga-actions'
@@ -9,6 +10,7 @@ import { GET_DECK } from '@actions/saga-actions'
 import Loading from '@styled-components/Loading'
 import ErrorToShow from '@styled-components/ErrorToShow'
 import Container from '@styled-components/Container'
+import ContentScore from '@styled-components/ContentScore'
 import TextCenter from '@styled-components/TextCenter'
 
 
@@ -20,8 +22,7 @@ class Score extends Component {
     }
 
     componentDidMount() {
-        const { deck } = this.props.navigation.state.params
-        const { searchDeck } = this.props
+        const { navigation: { state: { params: { deck } } }, searchDeck } = this.props
 
         searchDeck(deck)
             .then(res => {
@@ -57,7 +58,7 @@ class Score extends Component {
     }, 0)
 
     render() {
-        const { deck } = this.props.navigation.state.params
+        const { navigation: { state: { params: { deck } } } } = this.props
         const { loading, error, percentScoreCorrect, percentScoreInCorrect } = this.state
 
         if (error) {
@@ -68,16 +69,53 @@ class Score extends Component {
             return <Loading />
         }
 
+        //Variables of content score        
+        let colorText = '#FF0000'
+        let percentToShow = '0.00'
+        let textToShow = 'Please playcards first to see a score!'
+        let emoji = 'wink'
+
+        if (percentScoreCorrect >= 75) {
+            colorText = '#3CB371'
+            percentToShow = percentScoreCorrect
+            textToShow = "It's great! Congratulations!!!"
+            emoji = 'clap'
+        }
+
+        if (percentScoreCorrect >= 50 && percentScoreCorrect < 75) {
+            colorText = '#3CB371'
+            percentToShow = percentScoreCorrect
+            textToShow = "Very Good! Work hard another time to raise more!"
+            emoji = 'muscle'
+        }
+
+        if (percentScoreCorrect < 50 && percentScoreInCorrect <= 50 && (parseFloat(percentScoreCorrect) !== 0 || parseFloat(percentScoreInCorrect) !== 0)) {
+            colorText = '#FFA500'
+            percentToShow = percentScoreInCorrect
+            textToShow = "You can do more!"
+            emoji = 'facepunch'
+        }
+
+        if (percentScoreCorrect < 50 && percentScoreInCorrect > 50) {
+            colorText = '#FF0000'
+            percentToShow = percentScoreInCorrect
+            textToShow = "It's worst then i thinked! Get some books to study more!"
+            emoji = 'hankey'
+        }
+
         return (
             <Container>
-                <TextCenter>{percentScoreCorrect}%</TextCenter>
-                <TextCenter>{percentScoreInCorrect}%</TextCenter>
+                <ContentScore>
+                    <TextCenter fontSize='40' color={colorText}>{percentToShow}%</TextCenter>
+                    <Emoji name={emoji} style={{ fontSize: 50, textAlign: 'center' }} />
+                    <TextCenter>{textToShow}</TextCenter>
+                </ContentScore>
             </Container>
         )        
     }
 }
 
-const mapStateToProps = ({deck: { data, error }}) => ({
+const mapStateToProps = ({ deck: { data, error } }) => ({
     data, error
 })
 
@@ -86,5 +124,21 @@ const mapDispatchToProps = dispatch => ({
         type: GET_DECK, 
         payload: { resolve, reject, deck: titleDeck }}))
 })
+
+const { shape, object, string } = PropTypes
+
+Score.propTypes = {
+    deck: shape({
+        data: object.isRequired,
+        error: string
+    }),
+    navigation: shape({ 
+        state: shape({ 
+            params: shape({ 
+                deck: string.isRequired
+            })
+        })
+    })
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Score)
