@@ -4,6 +4,7 @@ import { all } from 'redux-saga/effects'
 import watchInitialData from './Deck/getInitialData'
 import watchGetDecks from './Deck/getDecks'
 import watchGetDeck from './Deck/getDeck'
+import watchSaveDeckTitle from './Deck/saveDeck'
 
 //Answer
 import watchSaveAnswer from './Deck/saveAnswerOnDeck'
@@ -15,5 +16,6 @@ export default function* () {
         watchGetDecks(),
         watchGetDeck(),
         watchSaveAnswer(),
+        watchSaveDeckTitle(),
     ])
 }
