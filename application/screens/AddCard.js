@@ -95,6 +95,7 @@ class AddCard extends PureComponent {
                         value={textQuestion}
                         onChangeText={(text) => this.handleTextQuestion(text)}
                         style={{ marginTop: 40 }}
+                        borderColor='#ADD8E6'
                         />
 
                     <TextInput
@@ -102,11 +103,12 @@ class AddCard extends PureComponent {
                         value={textAnswer}
                         onChangeText={(text) => this.handleTextAnswer(text)} 
                         style={{ marginTop: 40 }}
+                        borderColor='#ADD8E6'
                         />
                     <ContainerButton>
                         <ButtonCard 
-                            backgroundColor='#000' 
-                            borderColor='#000'
+                            backgroundColor='#ADD8E6' 
+                            borderColor='#F5F5F5'
                             onPress={() => this.saveQuestion()}
                             style={{ alignSelf: 'center'}}>
                             <TextCenter color='#FFF'>Submit</TextCenter>
