@@ -84,7 +84,7 @@ class Score extends Component {
         if (percentScoreCorrect >= 50 && percentScoreCorrect < 75) {
             colorText = '#3CB371'
             percentToShow = percentScoreCorrect
-            textToShow = "Very Good! Work hard another time to raise more!"
+            textToShow = "Very Good! Work hard another time to raise your score!"
             emoji = 'muscle'
         }
 
