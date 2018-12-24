@@ -41,7 +41,8 @@ class NewDeck extends PureComponent {
 
                 this.setState({
                     success: true,
-                    textTitle: ''
+                    textTitle: '',
+                    error: ''
                 })
             })
         })
@@ -94,7 +95,7 @@ class NewDeck extends PureComponent {
                             borderColor='#000'
                             onPress={() => this.saveNewDeck()}
                             style={{ alignSelf: 'center'}}>
-                            <TextCenter color='#FFF'>Enviar</TextCenter>
+                            <TextCenter color='#FFF'>Submit</TextCenter>
                         </ButtonCard>
                     </ContainerButton>
                 </ContentNewDeck>
