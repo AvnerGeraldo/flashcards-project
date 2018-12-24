@@ -5,6 +5,7 @@ import { createStackNavigator, HeaderBackButton, StackActions, NavigationActions
 import Decks from '@screens/Decks'
 import Quiz from '@screens/Quiz'
 import Score from '@screens/Score'
+import AddCard from '@screens/AddCard'
 
 export default createStackNavigator({
     'Decks': {
@@ -42,6 +43,16 @@ export default createStackNavigator({
                 }} />
             )
         })
+    },
+    AddCard: {
+        screen: AddCard,
+        navigationOptions: {
+            title: 'Add Card',
+            headerTintColor: '#000',
+            headerStyle: {
+                backgroundColor: '#FFF',
+            },
+        }
     },
 }, {
     initialRouteName: 'Decks'
