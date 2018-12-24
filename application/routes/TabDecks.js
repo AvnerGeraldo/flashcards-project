@@ -18,9 +18,9 @@ export default createStackNavigator({
         screen: Quiz,
         navigationOptions: {
             title: 'Quiz',
-            headerTintColor: '#000',
+            headerTintColor: '#FFF',
             headerStyle: {
-                backgroundColor: '#FFF',
+                backgroundColor: '#ADD8E6',
             },
         }
     },
@@ -28,19 +28,22 @@ export default createStackNavigator({
         screen: Score,
         navigationOptions: ({ navigation: { state: { params }, dispatch }}) => ({
             title: `Score of ${params.deck}`,
-            headerTintColor: '#000',
+            headerTintColor: '#FFF',
             headerStyle: {
-                backgroundColor: '#FFF',
+                backgroundColor: '#ADD8E6',
             },
             headerLeft: (
-                <HeaderBackButton onPress={() => {
-                    const resetAction = StackActions.reset({
-                        index: 0,
-                        actions: [NavigationActions.navigate({ routeName: 'Decks' })]
-                    })
+                <HeaderBackButton 
+                    tintColor='#FFF'
+                    onPress={() => {
+                        const resetAction = StackActions.reset({
+                            index: 0,
+                            actions: [NavigationActions.navigate({ routeName: 'Decks' })]
+                        })
 
-                    dispatch(resetAction)
-                }} />
+                        dispatch(resetAction)
+                    }}                    
+                />
             )
         })
     },
