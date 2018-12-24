@@ -88,11 +88,13 @@ class NewDeck extends PureComponent {
                     <TextInput
                         placeholder='Deck title'
                         value={textTitle}
-                        onChangeText={(text) => this.handleTextTitle(text)} />
+                        onChangeText={(text) => this.handleTextTitle(text)} 
+                        borderColor='#ADD8E6'
+                        />
                     <ContainerButton>
                         <ButtonCard 
-                            backgroundColor='#000' 
-                            borderColor='#000'
+                            backgroundColor='#ADD8E6' 
+                            borderColor='#F5F5F5'
                             onPress={() => this.saveNewDeck()}
                             style={{ alignSelf: 'center'}}>
                             <TextCenter color='#FFF'>Submit</TextCenter>
