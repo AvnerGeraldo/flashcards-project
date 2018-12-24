@@ -47,7 +47,7 @@ const MenuCard = ({ navigation, title, questions }) => {
                     <Title>{title}</Title>
                     <SubTitle>{counterQuestions} Cards</SubTitle>
                     <ContainerButton>
-                        <ButtonCard>
+                        <ButtonCard onPress={() => navigation.navigate('AddCard', { deck: title })}>
                             <ButtonText>Add Card</ButtonText>
                         </ButtonCard>
                         <ButtonCard borderColor='#87CEFA' onPress={() => navigation.navigate('Score', { deck: title })}>
