@@ -48,9 +48,9 @@ export default createStackNavigator({
         screen: AddCard,
         navigationOptions: {
             title: 'Add Card',
-            headerTintColor: '#000',
+            headerTintColor: '#FFF',
             headerStyle: {
-                backgroundColor: '#FFF',
+                backgroundColor: '#ADD8E6',
             },
         }
     },
