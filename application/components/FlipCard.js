@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import FlipCardNative from 'react-native-flip-card'
 
 //Styled Components
 import ContainerQuiz from '@styled-components/ContainerQuiz'
@@ -12,6 +13,7 @@ class FlipCard extends Component {
 
     flipCard = () => {
         const { showBackCard } = this.state
+        console.log('aqui', showBackCard)
         this.setState({ showBackCard: !showBackCard })
     }
 
@@ -29,28 +31,30 @@ class FlipCard extends Component {
         const { showBackCard } = this.state
 
         return (
-            <ContainerQuiz>
-                {
-                    !showBackCard 
-                    ? (
-                        <FrontCard 
-                            actualPos={positionCard}
-                            endPos={totalCountCards} 
-                            question={question} 
-                            flipCard={this.flipCard}
-                        />
-                    )
-                    :
-                    (
-                        <BackCard 
-                            actualPos={positionCard}
-                            endPos={totalCountCards}
-                            answer={answer}
-                            responseAnswer={this.completeCard}
-                        />
-                    )
-                }           
-            </ContainerQuiz>
+            <FlipCardNative
+                friction={6}
+                perspective={1000}
+                flipHorizontal={true}
+                flipVertical={false}
+                flip={showBackCard}
+                clickable={false}
+                style={{
+                    border: '0px',
+                    backgroundColor: '#FFF',
+                }}>
+                <FrontCard 
+                    actualPos={positionCard}
+                    endPos={totalCountCards} 
+                    question={question}
+                    flipCard={this.flipCard}
+                />
+                <BackCard 
+                    actualPos={positionCard}
+                    endPos={totalCountCards}
+                    answer={answer}
+                    responseAnswer={this.completeCard}
+                />
+            </FlipCardNative>
         )        
     }
 }
