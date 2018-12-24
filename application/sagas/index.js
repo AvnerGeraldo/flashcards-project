@@ -6,6 +6,9 @@ import watchGetDecks from './Deck/getDecks'
 import watchGetDeck from './Deck/getDeck'
 import watchSaveDeckTitle from './Deck/saveDeck'
 
+//Question
+import watchSaveQuestion from './Deck/saveQuestionOnDeck.js'
+
 //Answer
 import watchSaveAnswer from './Deck/saveAnswerOnDeck'
 
@@ -17,5 +20,6 @@ export default function* () {
         watchGetDeck(),
         watchSaveAnswer(),
         watchSaveDeckTitle(),
+        watchSaveQuestion(),
     ])
 }
