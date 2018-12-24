@@ -14,7 +14,7 @@ import ErrorContainer from '@styled-components/ErrorToShow'
 
 class Decks extends PureComponent {
     state = {
-        loading: true
+        loading: true,
     }
 
     componentDidMount() {        
@@ -38,6 +38,7 @@ class Decks extends PureComponent {
             <FlatList 
                 horizontal={true} 
                 data={Object.keys(dataDecks)}
+                extraData={Object.keys(dataDecks).length}
                 listEmptyComponent={_ => <ErrorContainer textError="Não há dados para serem exibidos!" />}
                 keyExtractor={(titleDeck) => titleDeck}
                 renderItem={({ item }) => {      
