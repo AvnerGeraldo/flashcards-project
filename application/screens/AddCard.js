@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
-import { View, KeyboardAvoidingView } from 'react-native'
+import { KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 //Actions
 import { SAVE_QUESTION_ON_DECK, GET_DECKS } from '@actions/saga-actions'
@@ -88,11 +89,13 @@ class AddCard extends PureComponent {
                 style={{ flex: 1 }}
                 behavior="padding">
                 {component || null}
-                <ContentAddCard style={{ backgroundColor: '#FFF' }}>                  
+                <ContentAddCard style={{ backgroundColor: '#FFF' }}>
                     <TextInput
                         placeholder='Question'
                         value={textQuestion}
-                        onChangeText={(text) => this.handleTextQuestion(text)} />
+                        onChangeText={(text) => this.handleTextQuestion(text)}
+                        style={{ marginTop: 40 }}
+                        />
 
                     <TextInput
                         placeholder='Answer'
@@ -138,5 +141,22 @@ const mapDispatchToProps = dispatch => ({
         }
     }))
 })
+
+const { shape, string, func } = PropTypes
+
+AddCard.propTypes = {
+    navigation: shape({ 
+        state: shape({ 
+            params: shape({ 
+                deck: string.isRequired 
+            })
+        })
+    }),
+    saveQuestion: func.isRequired,
+    getDecks: func.isRequired,
+    listDecks: shape({
+        error: string
+    })
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCard)
