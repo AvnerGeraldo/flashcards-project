@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dimensions, View, Text } from 'react-native'
+import { Dimensions, View } from 'react-native'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { withNavigation } from 'react-navigation'
