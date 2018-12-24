@@ -14,7 +14,7 @@ import ErrorContainer from '@styled-components/ErrorToShow'
 
 class Decks extends PureComponent {
     state = {
-        loading: true,
+        loading: true
     }
 
     componentDidMount() {        
@@ -38,8 +38,9 @@ class Decks extends PureComponent {
             <FlatList 
                 horizontal={true} 
                 data={Object.keys(dataDecks)}
-                keyExtractor={(title) => title}
-                renderItem={({ item }) => {
+                listEmptyComponent={_ => <ErrorContainer textError="Não há dados para serem exibidos!" />}
+                keyExtractor={(titleDeck) => titleDeck}
+                renderItem={({ item }) => {      
                     const itemObj = dataDecks[item]
                     return <MenuCard title={itemObj.title} questions={itemObj.questions} />
                 }}
@@ -54,7 +55,10 @@ const mapStateToProps = ({ listDecks: { dataDecks, error } }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    searchDecks: _=> new Promise((resolve, reject) => dispatch({ type: GET_DECKS, payload: { resolve, reject }}))
+    searchDecks: _=> new Promise((resolve, reject) => dispatch({ 
+        type: GET_DECKS, 
+        payload: { resolve, reject }
+    }))
 })
 
 const { func, object, string } = PropTypes
