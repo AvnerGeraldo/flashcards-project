@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import FlipCardNative from 'react-native-flip-card'
 
 //Styled Components
-import ContainerQuiz from '@styled-components/ContainerQuiz'
 import FrontCard from '@styled-components/FrontCard'
 import BackCard from '@styled-components/BackCard'
 
@@ -12,8 +11,7 @@ class FlipCard extends Component {
     }
 
     flipCard = () => {
-        const { showBackCard } = this.state
-        console.log('aqui', showBackCard)
+        const { showBackCard } = this.state        
         this.setState({ showBackCard: !showBackCard })
     }
 
@@ -32,16 +30,17 @@ class FlipCard extends Component {
 
         return (
             <FlipCardNative
-                friction={6}
-                perspective={1000}
+                friction={8}
+                perspective={1}
                 flipHorizontal={true}
                 flipVertical={false}
                 flip={showBackCard}
                 clickable={false}
                 style={{
-                    border: '0px',
                     backgroundColor: '#FFF',
-                }}>
+                    borderWidth: 0
+                }}
+                >
                 <FrontCard 
                     actualPos={positionCard}
                     endPos={totalCountCards} 
