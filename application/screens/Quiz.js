@@ -42,6 +42,11 @@ class Quiz extends PureComponent {
         const { actualPosQuis, error } = this.state
         const data = this.props.navigation.getParam('questions')
         const totalCountCards = data.length
+
+        if (totalCountCards === 0) {
+            return <ErrorToShow textError='This deck is still without questions yet. Please add cards to playcards.' />
+        }
+
         const { question, answer } = data[actualPosQuis - 1]
 
         if (error) {
