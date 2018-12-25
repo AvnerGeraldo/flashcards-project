@@ -34,16 +34,22 @@ class Score extends Component {
 
                 //Pegar novos dados
                 const { data } = this.props
-
-                if (data) {
+                
+                if (data.questions.length === 0) {
+                    this.setState({
+                        loading: false,
+                    })
+                } else {
                     const questions = data.questions
 
                     //Calcular PercentScore
-                    this.setState({
-                        loading: false,
-                        percentScoreCorrect: ((this.findTotalAnswers(questions, 'C') / questions.length)*100).toFixed(2),
-                        percentScoreInCorrect: ((this.findTotalAnswers(questions, 'I') / questions.length)*100).toFixed(2)
-                    })
+                    if (questions.length > 0) {
+                        this.setState({
+                            loading: false,
+                            percentScoreCorrect: ((this.findTotalAnswers(questions, 'C') / questions.length)*100).toFixed(2),
+                            percentScoreInCorrect: ((this.findTotalAnswers(questions, 'I') / questions.length)*100).toFixed(2)
+                        })
+                    }
                 }
             })
     }
