@@ -31,7 +31,7 @@ class FlipCard extends Component {
         return (
             <FlipCardNative
                 friction={8}
-                perspective={1}
+                perspective={1000}
                 flipHorizontal={true}
                 flipVertical={false}
                 flip={showBackCard}
