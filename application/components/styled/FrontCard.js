@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { MaterialIcons } from '@expo/vector-icons'
 
 //Components
 import Card from '@styled-components/Card'
+import ButtonCard from '@styled-components/ButtonCard'
+import ButtonText from '@styled-components/ButtonText'
 
 const FrontCard = styled.View`
     flex: 1;
@@ -29,29 +30,25 @@ const TextQuestion = styled.Text`
     margin-top: 20;
 `
 
-const IconContent = styled.View`
+const ContentButton = styled.View`
     flex: 1;
     justify-content: center;
     align-items: center;
 `
-const TextIcon = styled.Text`
-    font-size: 12px;
-`
-
 export default ({ actualPos, endPos, question, flipCard }) => (
     <Card>
         <FrontCard>
             <TextIndicatorCountCard>{actualPos} / {endPos}</TextIndicatorCountCard>
             <QuestionContent>
                 <TextQuestion>{question}</TextQuestion>
-                <IconContent>
-                    <MaterialIcons
-                        name='flip'
-                        size={60}
-                        onPress={() => flipCard()}
-                    />
-                    <TextIcon>Flip the card</TextIcon>
-                </IconContent>
+                <ContentButton>
+                    <ButtonCard
+                        backgroundColor="#ADD8E6"
+                        borderColor="#ADD8E6"
+                        onPress={_=>flipCard()}>
+                        <ButtonText colorText="#FFF">Show Answer</ButtonText>
+                    </ButtonCard>
+                </ContentButton>
             </QuestionContent>
         </FrontCard>
     </Card>
