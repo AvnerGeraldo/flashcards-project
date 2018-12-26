@@ -35,12 +35,12 @@ class AddCard extends PureComponent {
         .then(res => {
             this.props.getDecks()
             .then(res => {
-                if (this.props.error) {
+                const { errorDecks, errorSaveOnDeck } = this.props
+
+                if (errorDecks || errorSaveOnDeck) {
                     this.setState({
                         success: false,
-                        error: this.props.error,
-                        textQuestion: '', 
-                        textAnswer: ''
+                        error: errorDecks || errorSaveOnDeck
                     })
                     return
                 }
@@ -54,7 +54,9 @@ class AddCard extends PureComponent {
                 })
             })
         })
-        .catch(error => this.setState({ error:error.message }))
+        .catch(error => this.setState({ 
+            error:error.message 
+        }))
     }
 
     setTimeToHideMessage = () => {
@@ -120,8 +122,9 @@ class AddCard extends PureComponent {
     }
 }
 
-const mapStateToProps = ({ listDecks: { error } }) => ({
-    error
+const mapStateToProps = ({ listDecks, deck }) => ({
+    errorDecks: listDecks.error,
+    errorSaveOnDeck: deck.error
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -156,9 +159,8 @@ AddCard.propTypes = {
     }),
     saveQuestion: func.isRequired,
     getDecks: func.isRequired,
-    listDecks: shape({
-        error: string
-    })
+    errorDecks: string,
+    errorSaveOnDeck: string,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCard)
