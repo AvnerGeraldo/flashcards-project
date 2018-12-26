@@ -1,4 +1,4 @@
-import { GET_DECKS_ASYNC, ERROR_DECKS_ASYNC } from '@actions'
+import { SAVE_DECK_ASYNC, GET_DECKS_ASYNC, ERROR_DECKS_ASYNC } from '@actions'
 
 const initialState = {
     dataDecks: {},
@@ -7,6 +7,11 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
     switch(type) {
+        case SAVE_DECK_ASYNC:
+            return {
+                ...state,
+                error: ''
+            }            
         case GET_DECKS_ASYNC:
             const { dataDecks } = payload
             return {
