@@ -41,6 +41,11 @@ export const getDeck = async(title) => {
 
 export const saveDeckTitle = async(title) => {
     try {
+        //Verify if title is empty
+        if (title.length === 0) {
+            throw new Error('Please fill field with title of the deck.')
+        }
+
         //Get data API
         const allData = await getDataOnAsyncStorage()
 
@@ -79,7 +84,7 @@ export const addCardToDeck = async(title, card) => {
 
         //Exists the deck?
         if (!deck) {
-            throw new Exception('Error: Deck not exists! Add card to deck.')
+            throw new Error('Error: Deck not exists! Add card to deck.')
         }
         
         //Add Card to deck
