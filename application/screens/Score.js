@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 import Emoji from 'react-native-emoji'
 import PropTypes from 'prop-types'
@@ -11,6 +12,8 @@ import Loading from '@styled-components/Loading'
 import ErrorToShow from '@styled-components/ErrorToShow'
 import Card from '@styled-components/Card'
 import TextCenter from '@styled-components/TextCenter'
+import ButtonCard from '@styled-components/ButtonCard'
+import ButtonText from '@styled-components/ButtonText'
 
 
 class Score extends Component {
@@ -63,8 +66,9 @@ class Score extends Component {
     }, 0)
 
     render() {
-        const { navigation: { state: { params: { deck } } } } = this.props
+        const { navigation, data: { questions } } = this.props
         const { loading, error, percentScoreCorrect, percentScoreInCorrect } = this.state
+        const { deck } = navigation.state.params
 
         if (error) {
             return <ErrorToShow textError={error} />
@@ -113,6 +117,20 @@ class Score extends Component {
                 <TextCenter fontSize='40' color={colorText}>{percentToShow}%</TextCenter>
                 <Emoji name={emoji} style={{ fontSize: 50, textAlign: 'center' }} />
                 <TextCenter>{textToShow}</TextCenter>
+                <View style={{
+                    marginLeft: 30,
+                    marginRight: 30
+                }}>
+                    <ButtonCard
+                        backgroundColor="#ADD8E6"
+                        borderColor="#ADD8E6"
+                        onPress={_ => navigation.replace('Quiz', {
+                                title: deck,
+                                questions
+                        })}>
+                        <ButtonText colorText="#FFF">Restart Quiz</ButtonText>
+                    </ButtonCard>
+                </View>
             </Card>
         )        
     }
