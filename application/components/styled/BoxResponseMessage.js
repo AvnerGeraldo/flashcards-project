@@ -4,14 +4,15 @@ import styled from 'styled-components'
 const BoxResponseMessage = styled.View`    
     padding: 10px 20px;
     background-color: ${({ backgroundColor }) => backgroundColor};
-    border-color: ${({ borderColor }) => borderColor};    
+    border-color: ${({ borderColor }) => borderColor};   
+    margin-top: ${({ marginTop }) => marginTop || 'auto'};
 `
 const Text = styled.Text`
     color: ${({ color }) => color};
     text-align: center;
 `
 
-export default ({ typeAlert, textToShow }) => {
+export default ({ typeAlert, textToShow, marginTop }) => {
     let backgroundColor, borderColor, color
 
     switch(typeAlert) {
@@ -35,6 +36,7 @@ export default ({ typeAlert, textToShow }) => {
     return (
     <BoxResponseMessage
         backgroundColor={backgroundColor}
-        borderColor={borderColor}><Text color={color}>{textToShow}</Text></BoxResponseMessage>)
+        borderColor={borderColor}
+        marginTop={marginTop}><Text color={color}>{textToShow}</Text></BoxResponseMessage>)
         
 }
