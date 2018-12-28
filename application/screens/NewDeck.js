@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View, KeyboardAvoidingView } from 'react-native'
+import { View, KeyboardAvoidingView, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 
 //Actions
@@ -84,7 +84,12 @@ class NewDeck extends PureComponent {
         }
 
        if (success || error) {
-            component = <BoxResponseMessage typeAlert={typeAlert} textToShow={textToShow} />
+            component = <BoxResponseMessage 
+                typeAlert={typeAlert}
+                textToShow={textToShow}
+                marginTop={StatusBar.currentHeight}
+            />
+
             this.setTimeToHideMessage()
        }
 
