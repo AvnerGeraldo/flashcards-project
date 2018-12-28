@@ -50,10 +50,22 @@ class NewDeck extends PureComponent {
     }
 
     setTimeToHideMessage = () => {
-        setTimeout(() => this.setState({ 
-            success: false,
-            error: ''
-        }), 5000)
+        setTimeout(_ => {
+                this.setState({ 
+                success: false,
+                error: ''
+            })
+
+            this.modeToNewDeckOnFlatList()
+        }, 5000)
+    }
+
+    modeToNewDeckOnFlatList = _=> {
+        const { navigation, dataDecks } = this.props
+    
+        navigation.navigate('Decks', {
+            moveFlatListTo: Object.keys(dataDecks).length - 1
+        })  
     }
 
     render() {
@@ -106,7 +118,8 @@ class NewDeck extends PureComponent {
     }
 }
 
-const mapStateToProps = ({ listDecks: { error } }) => ({
+const mapStateToProps = ({ listDecks: { dataDecks, error } }) => ({
+    dataDecks,
     error
 })
 
