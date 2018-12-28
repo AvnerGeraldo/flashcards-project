@@ -9,7 +9,7 @@ import NewDeck from '@screens/NewDeck'
 import TabDecks from './TabDecks'
 
 export default createBottomTabNavigator({
-    Decks: {
+    TabDecks: {
         screen: TabDecks,
         navigationOptions: {
             tabBarLabel: 'Decks',
@@ -29,7 +29,7 @@ export default createBottomTabNavigator({
     }
 },
 {
-    initialRouteName: 'Decks',
+    initialRouteName: 'TabDecks',
     tabBarOptions: {
         activeTintColor: 'tomato',
         inactiveTintColor: 'grey',
