@@ -8,7 +8,7 @@ import Score from '@screens/Score'
 import AddCard from '@screens/AddCard'
 
 export default createStackNavigator({
-    'Decks': {
+    Decks: {
         screen: Decks,
         navigationOptions: {
             header: null
