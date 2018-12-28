@@ -56,11 +56,11 @@ class NewDeck extends PureComponent {
                 error: ''
             })
 
-            this.modeToNewDeckOnFlatList()
+            this.moveToPositionNewDeckInFlatList()
         }, 5000)
     }
 
-    modeToNewDeckOnFlatList = _=> {
+    moveToPositionNewDeckInFlatList = _=> {
         const { navigation, dataDecks } = this.props
     
         navigation.navigate('Decks', {
