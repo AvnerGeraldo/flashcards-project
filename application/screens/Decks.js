@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -19,7 +19,32 @@ class Decks extends PureComponent {
 
     componentDidMount() {        
         this.props.searchDecks()
-            .then(res => this.setState({ loading: false }))
+            .then(res => this.setState({ loading: false }))        
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { navigation } = nextProps
+        const index = navigation.getParam('moveFlatListTo')
+
+        if (index) {
+            this.moveFlatListTo(index)
+        }
+    }
+
+    getItemLayout = (data, index) => {
+        const ITEM_HEIGHT = Dimensions.get('window').height
+
+        return {
+            length: ITEM_HEIGHT, 
+            offset: ITEM_HEIGHT * index, index
+        }
+    }
+
+    moveFlatListTo = index => {
+        this.flatListRef.scrollToIndex({
+            animated: true, 
+            index
+        });
     }
     
     render() {
@@ -35,12 +60,14 @@ class Decks extends PureComponent {
         }
 
         return (
-            <FlatList 
+            <FlatList
+                ref={ref => this.flatListRef = ref}
+                getItemLayout={this.getItemLayout}
                 horizontal={true} 
                 data={Object.keys(dataDecks)}
                 extraData={Object.keys(dataDecks).length}
                 listEmptyComponent={_ => <ErrorContainer textError="Não há dados para serem exibidos!" />}
-                keyExtractor={(titleDeck) => titleDeck}
+                keyExtractor={(titleDeck) => String(titleDeck).toLocaleLowerCase()}
                 renderItem={({ item }) => {      
                     const itemObj = dataDecks[item]
                     return <MenuCard title={itemObj.title} questions={itemObj.questions} />
